@@ -4,13 +4,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:web_app_nish/login%20module/screens/HomeScreen.dart';
 
+import 'AuthPage.dart';
+
 Future main() async {
-  // firebase
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
   runApp(const MyApp());
 }
+
+final navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -19,6 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -33,7 +37,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      home: LoginScreen(onClickedSignUp: () {  },),
       // home: LoginScreen(),
     );
   }
@@ -52,7 +56,7 @@ class MainPage extends StatelessWidget{
             }
           else
             {
-          return LoginScreen();
+          return AuthPage();
             }
         }
   ),
